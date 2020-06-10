@@ -2,7 +2,7 @@
 ### Clone
 > Clona este repositorio :
 ```shell
-git clone https://github.com/GeeksHubsAcademy/sequelize-crud`
+git clone https://github.com/GeeksHubsAcademy/sequelize-crud
 ```
 ### Setup
 >Ubicate en la carpeta api
