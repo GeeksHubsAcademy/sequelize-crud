@@ -1,4 +1,4 @@
-const { Movie, Director } = require('../models');
+const { Movie, Director, Actor } = require('../models');
 // Movie.findAll({
 //     include: [{
 //         model: Director,
@@ -8,7 +8,7 @@ const { Movie, Director } = require('../models');
 const MovieController = {
     getAll(req, res) {
         Movie.findAll({
-                include: [Director]
+                include: [Director, Actor] //con include nos añade el director de la tabla directos (debemos tener relación creada en el modelo)
             }).then(movies => res.send(movies))
             .catch(error => {
                 console.error(error)
@@ -17,7 +17,10 @@ const MovieController = {
     },
     create(req, res) {
         Movie.create(req.body) //insertamos una fila en la tabla movies //INSERT INTO movies.movies () values(..,..,.)
-            .then(movie => res.status(201).send(movie)) //si se inserta correctamente entrará a ejecutar el callback del then
+            .then(movie => { //actors=[1,2]
+                movie.addActor(req.body.actors) //añade las filas que relacionan los actores con la movie creada a la tabla intermedia
+                res.status(201).send(movie)
+            }) //si se inserta correctamente entrará a ejecutar el callback del then
             .catch(error => {
                 console.error(error)
                 res.status(500).send({ message: 'There was a problem trying to add the movie' });
