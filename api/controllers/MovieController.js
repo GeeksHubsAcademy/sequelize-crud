@@ -1,8 +1,15 @@
-const { Movie } = require('../models');
-
+const { Movie, Director } = require('../models');
+// Movie.findAll({
+//     include: [{
+//         model: Director,
+//         attributes: { exclude: ['birthdate'] }
+//     }]
+// })
 const MovieController = {
     getAll(req, res) {
-        Movie.findAll().then(movies => res.send(movies))
+        Movie.findAll({
+                include: [Director]
+            }).then(movies => res.send(movies))
             .catch(error => {
                 console.error(error)
                 res.status(500).send({ message: 'There was a problem trying to get the movies' });
