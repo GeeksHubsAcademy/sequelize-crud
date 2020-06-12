@@ -8,6 +8,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next(); //imprescindible next para que ejecute la siguiente función
 });
+app.get('/', (req, res) => res.send('hola'))
 app.use('/movies', moviesRouter);
 app.use('/directors', directorsRouter);
 app.listen(PORT, () => console.log('server running on port ' + PORT))

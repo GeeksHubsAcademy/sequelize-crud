@@ -31,7 +31,7 @@ const MovieController = {
             })
     },
     delete(req, res) {
-        Movie.delete({
+        Movie.destroy({
                 where: {
                     id: req.params.id
                 }
